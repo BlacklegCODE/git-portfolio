@@ -1,0 +1,68 @@
+// header file with driver file
+#ifndef SINGLYLIST_H
+#define SINGLYLIST_H
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    struct node * next;
+    int data;
+};
+
+struct node * createnode(int value)
+{
+    struct node * newnode = (struct node*)malloc(sizeof(struct node));
+    newnode ->data = value;
+    newnode ->next = NULL;
+    return newnode;
+};
+
+void insertend(struct node** head, int value)
+{
+    struct node * newnode = createnode(value);
+    if(*head == NULL)
+    {
+        *head = newnode;
+    }
+    else
+    {
+        struct node * temp = *head;
+        while(temp -> next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp -> next = newnode;
+    }
+}
+void displaylist(struct node * head)
+{
+    struct node * temp = head;
+    while(temp != NULL)
+    {
+        printf("%d ->",temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+#endif 
+
+// driverfile
+
+#include<stdio.h>
+#include"singlylist.h"
+
+int main()
+{
+    struct node * head = NULL;
+
+    insertend(&head, 10);
+    insertend(&head, 20);
+    insertend(&head, 30);
+
+    printf("Singly list :\n");
+    displaylist(head);
+
+    return 0;
+}
